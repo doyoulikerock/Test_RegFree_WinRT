@@ -5,7 +5,7 @@ namespace WASAPI
     {
         Class();
         Int32 MyProperty;
-        void Init();
+        void Init(Int32 flag);
     }
 
 

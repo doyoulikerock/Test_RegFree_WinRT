@@ -32,14 +32,26 @@ namespace WinFormsApp
 
         }
 
+
+        WASAPI.Class wasClass = null;
         private void button2_Click(object sender, EventArgs e)
         {
-            WASAPI.Class wasClass = new WASAPI.Class();
+            if(wasClass == null)
+                wasClass = new WASAPI.Class();
             string text = wasClass.MyProperty.ToString();
 
-            wasClass.Init();
+            wasClass.Init(0);
 
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (wasClass == null)
+                wasClass = new WASAPI.Class();
+            string text = wasClass.MyProperty.ToString();
+
+            wasClass.Init(1);
         }
     }
 }

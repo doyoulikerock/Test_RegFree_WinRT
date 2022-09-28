@@ -14,6 +14,9 @@
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="WASAPICapture.cpp" />
+    <ClCompile Include="MFSampleGenerator.cpp" />
+    <ClCompile Include="ToneSampleGenerator.cpp" />
+    <ClCompile Include="WASAPIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -21,6 +24,9 @@
     <ClInclude Include="WASAPICapture.h" />
     <ClInclude Include="DeviceState.h" />
     <ClInclude Include="PlotData.h" />
+    <ClInclude Include="MFSampleGenerator.h" />
+    <ClInclude Include="ToneSampleGenerator.h" />
+    <ClInclude Include="WASAPIRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />

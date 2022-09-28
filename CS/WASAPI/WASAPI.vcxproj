@@ -102,7 +102,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(ProjectDir)$(GeneratedFilesDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(ProjectDir)$(GeneratedFilesDir);$(WindowsSDK_LibraryPath)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -117,14 +117,18 @@
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="DeviceState.h" />
+    <ClInclude Include="MFSampleGenerator.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Class.h">
       <DependentUpon>Class.idl</DependentUpon>
     </ClInclude>
     <ClInclude Include="PlotData.h" />
+    <ClInclude Include="ToneSampleGenerator.h" />
     <ClInclude Include="WASAPICapture.h" />
+    <ClInclude Include="WASAPIRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MFSampleGenerator.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -132,7 +136,9 @@
       <DependentUpon>Class.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="ToneSampleGenerator.cpp" />
     <ClCompile Include="WASAPICapture.cpp" />
+    <ClCompile Include="WASAPIRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
