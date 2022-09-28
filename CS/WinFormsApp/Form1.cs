@@ -31,5 +31,15 @@ namespace WinFormsApp
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            WASAPI.Class wasClass = new WASAPI.Class();
+            string text = wasClass.MyProperty.ToString();
+
+            wasClass.Init();
+
+
+        }
     }
 }

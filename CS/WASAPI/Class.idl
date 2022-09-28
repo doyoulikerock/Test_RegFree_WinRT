@@ -1,0 +1,10 @@
+namespace WASAPI
+{
+    [default_interface]
+    runtimeclass Class
+    {
+        Class();
+        Int32 MyProperty;
+        void Init();
+    }
+}

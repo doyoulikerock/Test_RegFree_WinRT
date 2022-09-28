@@ -143,6 +143,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -168,6 +171,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WASAPI\WASAPI.vcxproj">
+      <Project>{3e0760f3-c8bf-4103-8f8d-c67b37ae4e3e}</Project>
+      <Name>WASAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinRTComponent\WinRTComponent.vcxproj">
       <Project>{b017e025-e878-47c4-8090-7fe50e21ed77}</Project>
       <Name>WinRTComponent</Name>

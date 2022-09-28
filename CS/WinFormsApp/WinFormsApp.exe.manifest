@@ -8,5 +8,13 @@
         threadingModel="both"
         xmlns="urn:schemas-microsoft-com:winrt.v1" />
   </file>
+
+
+  <file name="WASAPI.dll">
+	<activatableClass
+		name="WASAPI.Class"
+		threadingModel="both"
+		xmlns="urn:schemas-microsoft-com:winrt.v1" />
+  </file>
   
 </assembly>
