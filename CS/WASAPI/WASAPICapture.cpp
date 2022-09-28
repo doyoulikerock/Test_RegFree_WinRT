@@ -73,6 +73,7 @@ namespace winrt::WASAPI
 
         check_hresult(m_audioClient->GetMixFormat(m_mixFormat.put()));
 
+
         // convert from Float to 16-bit PCM
         switch (m_mixFormat->wFormatTag)
         {

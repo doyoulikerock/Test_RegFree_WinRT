@@ -56,7 +56,18 @@ namespace winrt::WASAPI
         EmbeddedMFAsyncCallback<&WASAPIRenderer::OnStartPlayback> m_StartPlaybackCallback{ this };
         EmbeddedMFAsyncCallback<&WASAPIRenderer::OnStopPlayback> m_StopPlaybackCallback{ this };
         EmbeddedMFAsyncCallback<&WASAPIRenderer::OnPausePlayback> m_PausePlaybackCallback{ this };
+
+        
+        // TODO: test just filldata by generator (capture/decoder???) instead of callbackfuction
+        /* OnAudioSampleRequested()/ GetXXXSample()
+        * m_AudioRenderClient->GetBuffer(framesAvailable, &data));
+            if (!m_MFSource->FillSampleBuffer({ data, actualBytesToRead }, &actualBytesRead)
+        */
+        // callback functions
         EmbeddedMFAsyncCallback<&WASAPIRenderer::OnSampleReady> m_SampleReadyCallback{ this };
+        
+
+
 
         HRESULT ConfigureDeviceInternal() noexcept;
         void ValidateBufferValue();
