@@ -4,12 +4,17 @@
 
 namespace winrt::WASAPI::implementation
 {
-    struct Class : ClassT<Class>
+    /// <summary>
+    /// base class of WASAPI
+    /// </summary>
+    struct Class : ClassT<Class>, MediaFoundationInitializer
     {
         Class() = default;
 
         int32_t MyProperty();
         void MyProperty(int32_t value);
+
+        
         void Init();
     };
 }

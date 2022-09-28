@@ -14,8 +14,14 @@ namespace winrt::WASAPI::implementation
         printf("%d\n", value);
     }
 
+
+    /// <summary>
+    /// initialize capture/renderer
+    /// </summary>
     void Class::Init()
     {
+        //unique_shared_work_queue m_queueId{ L"Capture" };
+
         throw hresult_not_implemented();
     }
 }
