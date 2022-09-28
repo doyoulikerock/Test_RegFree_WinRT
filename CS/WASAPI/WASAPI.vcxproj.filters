@@ -13,10 +13,14 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="WASAPICapture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="WASAPICapture.h" />
+    <ClInclude Include="DeviceState.h" />
+    <ClInclude Include="PlotData.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />

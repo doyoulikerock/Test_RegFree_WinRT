@@ -102,6 +102,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories);$(ProjectDir)$(GeneratedFilesDir)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -115,10 +116,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="DeviceState.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Class.h">
       <DependentUpon>Class.idl</DependentUpon>
     </ClInclude>
+    <ClInclude Include="PlotData.h" />
+    <ClInclude Include="WASAPICapture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -128,6 +132,7 @@
       <DependentUpon>Class.idl</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="WASAPICapture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
