@@ -17,6 +17,7 @@
     <ClCompile Include="MFSampleGenerator.cpp" />
     <ClCompile Include="ToneSampleGenerator.cpp" />
     <ClCompile Include="WASAPIRenderer.cpp" />
+    <ClCompile Include="Env.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -27,9 +28,11 @@
     <ClInclude Include="MFSampleGenerator.h" />
     <ClInclude Include="ToneSampleGenerator.h" />
     <ClInclude Include="WASAPIRenderer.h" />
+    <ClInclude Include="Env.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Class.idl" />
+    <Midl Include="Env.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="WASAPI.def" />

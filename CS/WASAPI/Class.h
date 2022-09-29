@@ -16,7 +16,10 @@ namespace winrt::WASAPI::implementation
         int32_t MyProperty();
         void MyProperty(int32_t value);
 
-        
+        /// <summary>
+        /// initialize WASAPI capture/renderer
+        /// </summary>
+        /// <param name="value"></param>
         void Init(int32_t value);
     private:
         /** **************************************  capture */
@@ -75,6 +78,8 @@ namespace winrt::WASAPI::implementation
         void OnSetVolume(double volume);
 
     };
+
+
 }
 
 namespace winrt::WASAPI::factory_implementation
@@ -82,4 +87,7 @@ namespace winrt::WASAPI::factory_implementation
     struct Class : ClassT<Class, implementation::Class>
     {
     };
+
+  
+    
 }

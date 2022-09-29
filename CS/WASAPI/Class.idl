@@ -5,10 +5,13 @@ namespace WASAPI
     {
         Class();
         Int32 MyProperty;
+        /*
+        * initialize class
+        */
         void Init(Int32 flag);
     }
 
-
+   
 
 
     // NB: All states >= Initialized will allow some methods

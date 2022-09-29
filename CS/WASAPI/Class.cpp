@@ -15,6 +15,7 @@ using namespace winrt::Windows::Storage::Streams;
 //const GUID MFMediaType_Audio = { 0x73647561, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xAA, 0x00, 0x38, 0x9B, 0x71 };
 namespace winrt::WASAPI::implementation
 {
+
     int32_t Class::MyProperty()
     {
         return 1000;

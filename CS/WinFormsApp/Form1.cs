@@ -52,6 +52,12 @@ namespace WinFormsApp
             string text = wasClass.MyProperty.ToString();
 
             wasClass.Init(1);
+
+
+            WASAPI.Env env = new WASAPI.Env();
+            env.Prm1 = 2;
+            //int env_prm2 = WASAPI.Env.Method1();
+            int ret = env.Prm1;
         }
     }
 }
