@@ -20,7 +20,8 @@ namespace winrt::WASAPI::implementation
         prm1 = value;
     }
 
-
-
+    static int32_t nb_prms = 0;
+    int32_t Env::NumPrms() { return nb_prms; }
+    void Env::NumPrms(int32_t v) { nb_prms = v; }
 
 }

@@ -16,10 +16,7 @@ namespace winrt::WASAPI::implementation
         int32_t MyProperty();
         void MyProperty(int32_t value);
 
-        /// <summary>
-        /// initialize WASAPI capture/renderer
-        /// </summary>
-        /// <param name="value"></param>
+
         void Init(int32_t value);
     private:
         /** **************************************  capture */
