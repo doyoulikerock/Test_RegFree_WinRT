@@ -1,3 +1,9 @@
+# test WASPI capture/renderer dll with winform
+it works ok independently. 
+capture will make wave file.
+rendere will play tone samples.
+
+
 # Registration-free WinRT Samples
 
 This repo contains two samples (C# and C++) demonstrating how to use [Registration-free WinRT](https://aka.ms/regfreewinrtblog) (a new feature in Windows Builds 18309+) to reference a C++ Windows Runtime component in a non-packaged desktop app. More details can be found in each sample.
