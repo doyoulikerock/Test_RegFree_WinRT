@@ -50,19 +50,22 @@ namespace WinFormsApp
         /// </summary>
         /// <param name="memberInfo">The MemberInfo (reflection data) or the member to find documentation for</param>
         /// <returns>The XML fragment describing the member</returns>
-        public static XmlElement GetDocumentation(this MemberInfo memberInfo)
+        public static XmlElement GetDocumentation(this MemberInfo memberInfo, string prefix="")
         {
-            // First character [0] of member type is prefix character in the name in the XML
-            return XmlFromName(memberInfo.DeclaringType, memberInfo.MemberType.ToString()[0], memberInfo.Name);
+            if (prefix == "")
+                // First character [0] of member type is prefix character in the name in the XML
+                return XmlFromName(memberInfo.DeclaringType, memberInfo.MemberType.ToString()[0], memberInfo.Name);
+            else
+                return XmlFromPrefix(memberInfo.DeclaringType, prefix, memberInfo.Name);
         }
         /// <summary>
         /// Returns the Xml documenation summary comment for this member
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
-        public static string GetSummary(this MemberInfo memberInfo)
+        public static string GetSummary(this MemberInfo memberInfo, string prefix="")
         {
-            var element = memberInfo.GetDocumentation();
+            var element = memberInfo.GetDocumentation(prefix);
             var summaryElm = element?.SelectSingleNode("summary");
             if (summaryElm == null) return "";
 
@@ -127,6 +130,23 @@ namespace WinFormsApp
 
             return matchedElement;
         }
+
+
+        private static XmlElement XmlFromPrefix(this Type type, string prefix, string name)
+        {
+            string fullName;
+
+            
+            
+            fullName = prefix + "." + name;
+
+            var xmlDocument = XmlFromAssembly(type.Assembly);
+
+            var matchedElement = xmlDocument["doc"]["members"].SelectSingleNode("member[@name='" + fullName + "']") as XmlElement;
+
+            return matchedElement;
+        }
+
 
         /// <summary>
         /// A cache used to remember Xml documentation for assemblies
@@ -274,13 +294,14 @@ namespace WinFormsApp
 
             
             Type src = typeof(WASAPI.Env);
-            if(src.IsCOMObject && src.AssemblyQualifiedName.Contains("WindowsRuntime"))
+            string prefix = "";
+            if (src.IsCOMObject && src.AssemblyQualifiedName.Contains("WindowsRuntime"))
             {
                 // xml file is generated from dll project.
                 string dllname = src.Namespace; // "WASAPI";
 
                 string type = "M"; // read type from dll assembly is P, but documented type is M
-                string prefix = $"{type}:winrt.{dllname}.implementeation.{src.Name}";
+                prefix = $"{type}:winrt.{dllname}.implementation.{src.Name}";
                 // TODO: SelectSingleNode("
                 // F: field
                 // M: method   (documented type)
@@ -301,7 +322,7 @@ namespace WinFormsApp
                 //fentity.Description = src.GetMember(field.Name)[0].GetSummary();
                 var prop = src.GetProperty(field.Name);
 
-                fentity.Description = prop.GetSummary();
+                fentity.Description = prop.GetSummary(prefix);
 
             }
 
