@@ -153,7 +153,7 @@ namespace winrt::WASAPI::implementation
         auto lifetime = get_strong();
 
         // Get the current time for messages
-        std::time_t now = clock::to_time_t(clock::now());
+        time_t now = clock::to_time_t(clock::now());
         char buffer[26];
         ctime_s(buffer, ARRAYSIZE(buffer), &now);
 

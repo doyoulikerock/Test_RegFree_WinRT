@@ -14,6 +14,115 @@ using System.Xml;
 namespace WinFormsApp
 {
 
+
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+            WinRTComponent.Class winRTClass = new WinRTComponent.Class();
+            String textFromComponent = winRTClass.MyProperty.ToString();
+            TextBox1.Text = textFromComponent;
+
+            var popup = new Popup(textFromComponent);
+            popup.Show(this);
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        WASAPI.Class wasClass = null;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(wasClass == null)
+                wasClass = new WASAPI.Class();
+            string text = wasClass.MyProperty.ToString();
+
+            wasClass.Init(0);
+
+
+        }
+
+
+        class FieldEntity
+        {
+            public FieldInfo info;
+            public string Description;
+            public override string ToString()
+            {
+                return info.Name;
+            }
+        }
+
+      
+
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (wasClass == null)
+                wasClass = new WASAPI.Class();
+            string text = wasClass.MyProperty.ToString();
+
+            wasClass.Init(1);
+
+            var status = WASAPI.DeviceState.Activated;
+            
+            WASAPI.Env env = new WASAPI.Env();
+            env.Prm1 = 2;
+            //int env_prm2 = WASAPI.Env.Method1();
+            int ret = env.Prm1;
+
+            int nb_prms = WASAPI.Env.NumPrms;
+            WASAPI.Env.NumPrms = 0;
+
+            
+            Type src = typeof(WASAPI.Env);
+            string prefix = "";
+            if (src.IsCOMObject && src.AssemblyQualifiedName.Contains("WindowsRuntime"))
+            {
+                // xml file is generated from dll project.
+                string dllname = src.Namespace; // "WASAPI";
+
+                string type = "M"; // read type from dll assembly is P, but documented type is M
+                prefix = $"{type}:winrt.{dllname}.implementation.{src.Name}";
+                // TODO: SelectSingleNode("
+                // F: field
+                // M: method   (documented type)
+                // P: property ()
+            }
+            var props = src.GetProperties();
+            
+            var fieldlist = props.Where(x => x.PropertyType == typeof(int));
+            foreach (var field in fieldlist)
+            {
+                var fentity = new FieldEntity();
+
+                if (field.GetGetMethod().IsStatic)
+                {
+                    var v = field.GetGetMethod().Invoke(null, null);
+                }
+
+                //fentity.Description = src.GetMember(field.Name)[0].GetSummary();
+                var prop = src.GetProperty(field.Name);
+
+                fentity.Description = prop.GetSummary(prefix);
+
+            }
+
+        }
+    }
+
+
+
+
     /// <summary>
     /// Utility class to provide documentation for various types where available with the assembly
     /// </summary>
@@ -50,7 +159,7 @@ namespace WinFormsApp
         /// </summary>
         /// <param name="memberInfo">The MemberInfo (reflection data) or the member to find documentation for</param>
         /// <returns>The XML fragment describing the member</returns>
-        public static XmlElement GetDocumentation(this MemberInfo memberInfo, string prefix="")
+        public static XmlElement GetDocumentation(this MemberInfo memberInfo, string prefix = "")
         {
             if (prefix == "")
                 // First character [0] of member type is prefix character in the name in the XML
@@ -63,7 +172,7 @@ namespace WinFormsApp
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
-        public static string GetSummary(this MemberInfo memberInfo, string prefix="")
+        public static string GetSummary(this MemberInfo memberInfo, string prefix = "")
         {
             var element = memberInfo.GetDocumentation(prefix);
             var summaryElm = element?.SelectSingleNode("summary");
@@ -136,8 +245,8 @@ namespace WinFormsApp
         {
             string fullName;
 
-            
-            
+
+
             fullName = prefix + "." + name;
 
             var xmlDocument = XmlFromAssembly(type.Assembly);
@@ -225,107 +334,4 @@ namespace WinFormsApp
 
 
 
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-
-            WinRTComponent.Class winRTClass = new WinRTComponent.Class();
-            String textFromComponent = winRTClass.MyProperty.ToString();
-            TextBox1.Text = textFromComponent;
-
-            var popup = new Popup(textFromComponent);
-            popup.Show(this);
-        }
-
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        WASAPI.Class wasClass = null;
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if(wasClass == null)
-                wasClass = new WASAPI.Class();
-            string text = wasClass.MyProperty.ToString();
-
-            wasClass.Init(0);
-
-
-        }
-
-
-        class FieldEntity
-        {
-            public FieldInfo info;
-            public string Description;
-            public override string ToString()
-            {
-                return info.Name;
-            }
-        }
-
-      
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (wasClass == null)
-                wasClass = new WASAPI.Class();
-            string text = wasClass.MyProperty.ToString();
-
-            wasClass.Init(1);
-
-
-            WASAPI.Env env = new WASAPI.Env();
-            env.Prm1 = 2;
-            //int env_prm2 = WASAPI.Env.Method1();
-            int ret = env.Prm1;
-
-            int nb_prms = WASAPI.Env.NumPrms;
-            WASAPI.Env.NumPrms = 0;
-
-            
-            Type src = typeof(WASAPI.Env);
-            string prefix = "";
-            if (src.IsCOMObject && src.AssemblyQualifiedName.Contains("WindowsRuntime"))
-            {
-                // xml file is generated from dll project.
-                string dllname = src.Namespace; // "WASAPI";
-
-                string type = "M"; // read type from dll assembly is P, but documented type is M
-                prefix = $"{type}:winrt.{dllname}.implementation.{src.Name}";
-                // TODO: SelectSingleNode("
-                // F: field
-                // M: method   (documented type)
-                // P: property ()
-            }
-            var props = src.GetProperties();
-            
-            var fieldlist = props.Where(x => x.PropertyType == typeof(int));
-            foreach (var field in fieldlist)
-            {
-                var fentity = new FieldEntity();
-
-                if (field.GetGetMethod().IsStatic)
-                {
-                    var v = field.GetGetMethod().Invoke(null, null);
-                }
-
-                //fentity.Description = src.GetMember(field.Name)[0].GetSummary();
-                var prop = src.GetProperty(field.Name);
-
-                fentity.Description = prop.GetSummary(prefix);
-
-            }
-
-        }
-    }
 }
